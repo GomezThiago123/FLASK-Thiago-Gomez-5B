@@ -10,6 +10,7 @@ Para activar el entorno virtual:
 ```
 source .venv/bin/activate
 ```
+## Para correr el programa
 Para instalar las dependencias:
 ```
 pip install flask
