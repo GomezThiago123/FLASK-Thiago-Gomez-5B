@@ -1,6 +1,5 @@
-from flask import Flask
+from flask import Flask, render_template, url_for
 import sqlite3
-app = Flask(__name__)
 def dict_factory(cursor, row):
    """Arma un diccionario con los valores de la fila."""
    fields = [column[0] for column in cursor.description]
@@ -57,3 +56,19 @@ def testCrearXArgu(nombre,email):
     cursor.execute(consulta, (nombre, email))
     db.commit()
     return f"{nombre}"
+
+print(app.url_map)
+
+@app.route("/mostrar-datos-plantilla/<int:id>")
+def datos_plantilla(id):
+    abrirConexion()
+    cursor = db.cursor()
+    cursor.execute("SELECT id, usuario, email FROM usuarios WHERE id = ?;",(id,))
+    res = cursor.fetchone()
+    cerrarConexion()
+    usuario = None
+    email = None
+    if res != None:
+        usuario = res['Usuario']
+        email=res['email']
+    return render_template("datos.html", id=id,usuario=usuario,email=email)
