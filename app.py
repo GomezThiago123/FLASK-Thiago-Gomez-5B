@@ -69,6 +69,6 @@ def datos_plantilla(id):
     usuario = None
     email = None
     if res != None:
-        usuario = res['Usuario']
+        usuario = res['usuario']
         email=res['email']
-    return render_template("datos.html", id=id,usuario=usuario,email=email)
+    return render_template("datos.html", id=id,usuario=usuario,email=email)#variable y valor agregado
